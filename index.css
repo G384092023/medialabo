@@ -1,8 +1,56 @@
 body {
-    color: black;
+    background-color: black;
     
 }
-
-h1 h2 h3 {
+p{
+    font-size: 20px;
+    color: white;
+}
+h1{
+   font-size: 100px; 
+}
+h1, h2 {
     color: goldenrod;
+}
+
+h3{
+    font-size: 20px;
+  color: black;  
+}
+h2{
+    font-size: 50px;
+}
+a:link {
+    color: yellow;
+  }
+
+  a:visited{
+    color: yellow;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: pink;
+  }
+
+  div#all {
+	display: grid;                      
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    grid-auto-rows: minmax(100px, auto);
+   
+	grid-gap: 50px;                     
+
+    
+   
+} 
+
+
+div#all > div {
+	padding: 5px;
+	background: linear-gradient(yellow, black);
+}
+
+h2.mid {
+   /* margin-top: 200px; */
+    font-size: 50px;
 }
