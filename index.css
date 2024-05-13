@@ -5,11 +5,17 @@ body {
 p{
     font-size: 20px;
     color: white;
+    
+
 }
 h1{
+  color: goldenrod;
    font-size: 100px; 
+   border-bottom-style: solid ;
+   border-bottom-color: white;
+   border-bottom-width: 5px;
 }
-h1, h2 {
+ h2 {
     color: goldenrod;
 }
 
@@ -53,4 +59,12 @@ div#all > div {
 h2.mid {
    /* margin-top: 200px; */
     font-size: 50px;
+}
+
+.satu {
+  margin-top: 50px;
+}
+
+.setsumei {
+  font-size: x-large;
 }

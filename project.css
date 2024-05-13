@@ -1,0 +1,47 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    
+color: white;
+font-size: 100px;
+padding: 20px;
+  box-shadow:
+    inset 0 -3em 3em rgb(0 200 0 / 30%),
+    0 0 0 2px white,
+    0.3em 0.3em 1em rgb(200 0 0 / 60%);
+}
+
+h4, table, p{
+    color: white;
+    font-size: 20px;
+}
+
+table {
+    table-layout: auto;
+    width: 120px;
+    border: 1px solid red;
+  }
+  
+  tr {
+    border: 1px solid blue;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  a:link {
+    color: yellow;
+  }
+
+  a:visited{
+    color: yellow;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: pink;
+  }
+
+  
