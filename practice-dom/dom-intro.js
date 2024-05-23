@@ -4,7 +4,7 @@ console.log(p1);									// 検索結果のp要素のオブジェクトを表示
 console.log(p1.textContent);						// p要素の内容（テキスト）を表示
 
 console.log('----------------------');
-let ps2 = document.querySelectorAll('p.cands');		// p.cands(class=candsのp要素)を全て検索
+let ps2 = document.querySelectorAll('p.cands');	
 for (let p2 of ps2) {								// 検索結果のp要素それぞれに対して繰り返し..
 	console.log(p2.textContent);					// 要素のテキストを表示
 }
