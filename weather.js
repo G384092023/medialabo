@@ -59,3 +59,67 @@ let div = document.createElement('div');
 div.id = 'result';
 	
 h2.insertAdjacentElement('beforeend', div);	
+
+		
+
+
+
+
+
+
+let data1 = [['天気','気温(℃)','視度','空圧','湿度','風速(m/s)'],['曇りがち','9.94','10000','1022','14','2.65']];
+
+const tbl = document.createElement("table");
+  const tblBody = document.createElement("tbody");
+
+  let caption = document.createElement('caption');
+  caption.textContent = '詳細';
+  caption.style.textAlign = "center";
+  tbl.insertAdjacentElement('beforeend', caption);
+  
+
+  // creating all cells
+  for (let i = 0; i < 2; i++) {
+    // creates a table row
+    const row = document.createElement("tr");
+
+    for (let j = 0; j < 6; j++) {
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      const cell = document.createElement("td");
+      const cellText = document.createTextNode(data1[i][j]);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+    }
+
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+  }
+
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+  // appends <table> into <body>
+  document.body.appendChild(tbl);
+  // sets the border attribute of tbl to '2'
+  tbl.setAttribute("border", "2");
+
+  
+  let title = document.createElement('h1');	
+  title.textContent = data.name+'の天気';
+  title.style.textAlign = "center";
+  div.insertAdjacentElement('beforeend', title);
+  
+  let h4 = document.createElement('h4');	
+  h4.textContent = 'タイムゾーン： '+ data.timezone;
+  title.insertAdjacentElement('afterend', h4);
+  
+  let p = document.createElement('p');	
+  p.textContent = '座標： '+data.coord.lon +'、'+data.coord.lat;
+  h4.insertAdjacentElement('afterend', p);
+  
+  h4.insertAdjacentElement('afterend', tbl);
+
+  let b1 = document.querySelector('center');
+  b1.insertAdjacentElement('beforeend', tbl);
+  title.insertAdjacentElement('afterend', tbl);
