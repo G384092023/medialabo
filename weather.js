@@ -52,3 +52,10 @@ console.log('詳細');
 console.log('天気 '+' 気温(℃) '+' 視度'+' 空圧'+' 湿度'+' 風速(m/s)');
 console.log(data.weather[0].description + ' '+ data.main.temp+' ' + data.visibility+' ' +data.main.pressure+' ' + data.main.humidity+' ' +data.wind.speed );
 console.log('座標：'+data.coord.lon +'、'+data.coord.lat);
+
+let h2 = document.querySelector('body');		
+
+let div = document.createElement('div');	
+div.id = 'result';
+	
+h2.insertAdjacentElement('beforeend', div);	
