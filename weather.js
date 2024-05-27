@@ -116,10 +116,10 @@ const tbl = document.createElement("table");
   
   let p = document.createElement('p');	
   p.textContent = '座標： '+data.coord.lon +'、'+data.coord.lat;
-  h4.insertAdjacentElement('afterend', p);
+  tbl.insertAdjacentElement('afterend', p);
   
-  h4.insertAdjacentElement('afterend', tbl);
+  
 
-  let b1 = document.querySelector('center');
-  b1.insertAdjacentElement('beforeend', tbl);
-  title.insertAdjacentElement('afterend', tbl);
+ 
+
+  
