@@ -119,7 +119,15 @@ const tbl = document.createElement("table");
   tbl.insertAdjacentElement('afterend', p);
   
   
-
+  let b = document.querySelector('#print');
+  b.addEventListener('click', greeting);
+  
+  // 2. イベントハンドラの定義
+  function greeting() {
+      let i = document.querySelector('input[name="city"]');
+      let city = i.value;       // ユーザが記入した文字列
+      console.log('都市:' + city );
+  }
  
 
   
