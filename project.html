@@ -1,34 +1,95 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    
-        <title>北京市の天気</title>
-        <link rel="stylesheet" href="project.css">
-        <script src="weather.js" defer></script>
-  </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界の天気</title>
+  <link rel="stylesheet" href="project.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
   
-    
-  <body>
-      
-    
+</head>
+<body>
+ 
+
+  <div class="dropdown" id="dropdown">
+    <button id="colorButton"><strong>都市を選ぶ</strong></button>
+    <div class="dropdown-content" id="dropdownContent">
+      <div class="dropdown-item" id="egypt">
+        <a href="#">Egypt</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="360630">Cairo</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="russia">
+        <a href="#">Russia</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="524901">Moscow</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="south-africa">
+        <a href="#">South Africa</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="993800">Johannesburg</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="china">
+        <a href="#">China</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="1816670">Beijing</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="japan">
+        <a href="#">Japan</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="1850147">Tokyo</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="singapore">
+        <a href="#">Singapore</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="1880252">Singapore</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="australia">
+        <a href="#">Australia</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="2147714">Sydney</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="england">
+        <a href="#">England</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="2643743">London</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="france">
+        <a href="#">France</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="2968815">Paris</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="brazil">
+        <a href="#">Brazil</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="3451189">Rio de Janeiro</a>
+        </div>
+      </div>
+      <div class="dropdown-item" id="usa">
+        <a href="#">USA</a>
+        <div class="additional-item">
+          <a href="#" class="additional-link" data-value="5368361">Los Angeles</a>
+          <a href="#" class="additional-link" data-value="5128581">New York</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="first">
+    <button id="createBoxesBtn">世界の天気</button>
+   </div>
+
   
-    <label for="place">都市</label>
-    <select name="place" id="place">
-        <option value="">都市を選んでください</option>
-        <option value="360630">Cairo</option>
-        <option value="524901">Moscow </option>
-        <option value="993800">Johannesburg</option>
-        <option value="1816670">Beijing</option>
-        <option value="1850147">Tokyo</option>
-        <option value="1880252">Singapore</option>
-        <option value="2147714">Sydney</option>
-        <option value="2643743">London</option>
-        <option value="2968815">Paris</option>
-        <option value="3451189">Rio de Janeiro</option>
-        <option value="5128581">New York</option>
-        <option value="5368361">Los Angeles</option>
-    </select>
-    <button id="btn">コンソールに表示</button>
-    </body>
-</html> 
+  <script src="weather.js"></script>
+</body>
+</html>

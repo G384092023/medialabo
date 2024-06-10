@@ -1,142 +1,212 @@
-let data = {
-  "coord": {
-    "lon": 116.3972,
-    "lat": 39.9075
-  },
-  "weather": [
-    {
-      "id": 803,
-      "main": "Clouds",
-      "description": "曇りがち",
-      "icon": "04d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 9.94,
-    "feels_like": 8.65,
-    "temp_min": 9.94,
-    "temp_max": 9.94,
-    "pressure": 1022,
-    "humidity": 14,
-    "sea_level": 1022,
-    "grnd_level": 1016
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 2.65,
-    "deg": 197,
-    "gust": 4.84
-  },
-  "clouds": {
-    "all": 53
-  },
-  "dt": 1646542386,
-  "sys": {
-    "type": 1,
-    "id": 9609,
-    "country": "CN",
-    "sunrise": 1646520066,
-    "sunset": 1646561447
-  },
-  "timezone": 28800,
-  "id": 1816670,
-  "name": "北京市",
-  "cod": 200
-};
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Select all elements with the class 'additional-link'
+  const additionalLinks = document.querySelectorAll('.additional-link');
 
-////////// 課題3-2 ここからプログラムを書こう
-console.log(data.name+'の天気');
-console.log('タイムゾーン： '+ data.timezone);
-console.log('詳細');
-console.log('天気 '+' 気温(℃) '+' 視度'+' 空圧'+' 湿度'+' 風速(m/s)');
-console.log(data.weather[0].description + ' '+ data.main.temp+' ' + data.visibility+' ' +data.main.pressure+' ' + data.main.humidity+' ' +data.wind.speed );
-console.log('座標：'+data.coord.lon +'、'+data.coord.lat);
-
-let h2 = document.querySelector('body');		
-
-let div = document.createElement('div');	
-div.id = 'result';
-	
-h2.insertAdjacentElement('beforeend', div);	
-
-		
-
-
-
-
-
-
-let data1 = [['天気','気温(℃)','視度','空圧','湿度','風速(m/s)'],['曇りがち','9.94','10000','1022','14','2.65']];
-
-const tbl = document.createElement("table");
-  const tblBody = document.createElement("tbody");
-
-  let caption = document.createElement('caption');
-  caption.textContent = '詳細';
-  caption.style.textAlign = "center";
-  tbl.insertAdjacentElement('beforeend', caption);
-  
-
-  // creating all cells
-  for (let i = 0; i < 2; i++) {
-    // creates a table row
-    const row = document.createElement("tr");
-
-    for (let j = 0; j < 6; j++) {
-      // Create a <td> element and a text node, make the text
-      // node the contents of the <td>, and put the <td> at
-      // the end of the table row
-      const cell = document.createElement("td");
-      const cellText = document.createTextNode(data1[i][j]);
-      cell.appendChild(cellText);
-      row.appendChild(cell);
-    }
-
-    // add the row to the end of the table body
-    tblBody.appendChild(row);
+  // Function to change the background color
+  function changeBackgroundColor(color) {
+      document.body.style.backgroundColor = color;
   }
 
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  document.body.appendChild(tbl);
-  // sets the border attribute of tbl to '2'
-  tbl.setAttribute("border", "2");
+  // Add event listeners to each additional link
+  additionalLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+          event.preventDefault();  // Prevent default link behavior
+          // Change to a random background color for demonstration purposes
+          
+          const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+          changeBackgroundColor(randomColor);
+      });
+  });
+});
 
-  
-  let title = document.createElement('h1');	
-  title.textContent = data.name+'の天気';
-  title.style.textAlign = "center";
-  div.insertAdjacentElement('beforeend', title);
-  
-  let h4 = document.createElement('h4');	
-  h4.textContent = 'タイムゾーン： '+ data.timezone;
-  title.insertAdjacentElement('afterend', h4);
-  
-  let p = document.createElement('p');	
-  p.textContent = '座標： '+data.coord.lon +'、'+data.coord.lat;
-  tbl.insertAdjacentElement('afterend', p);
-  
-  
-  
-  
-  
+document.querySelectorAll('.additional-link').forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();  // Prevent default link behavior
+    let divrev = document.querySelector('div#result');
+    if (divrev!==null){
+      divrev.remove();
+    }
+    let divfirst = document.querySelector('div#first');
+    if (divfirst!==null){
+      divfirst.remove();
+    }
+    // Get the value from data-value attribute
+    const value = link.getAttribute('data-value');
+    
+    // Do something with the value
+    console.log('Value:', value);
+    sendRequest(value);
+    // Your further actions here
+  });
+});
 
-  let b = document.querySelector('button#btn');
-b.addEventListener('click', showSelectResult);
+function sendRequest(u) {
+// URL を設定
+let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/'+u+'.json';
 
-function showSelectResult() {
-    let s = document.querySelector('select#place');
-    let idx = s.selectedIndex;  // idx 番目の option が選択された
-
-    let os = s.querySelectorAll('option');  // s の子要素 option をすべて検索
-    let o = os.item(idx);       // os の idx 番目の要素
-
-    console.log('選択された ' + idx + ' 番目の option の情報:');
-    console.log('  value=' + o.getAttribute('value'));  // id 属性を表示
-    console.log('  textContent='+o.textContent);
+// 通信開始
+axios.get(url)
+  .then(showResult)
+  .catch(showError)
+  .then(finish);
 }
- 
 
-  
+// 通信が成功した時の処理
+function showResult(resp) {
+// サーバから送られてきたデータを出力
+let data = resp.data;
+
+// data が文字列型なら，オブジェクトに変換する
+if (typeof data === 'string') {
+  data = JSON.parse(data);
+}
+
+
+
+let h2 = document.querySelector('body');		
+let div = document.createElement('div');	
+div.id = 'result';
+h2.insertAdjacentElement('beforeend', div);	
+
+let name = document.createElement('p');
+name.classList.add("name");
+name.textContent = data.name;
+div.insertAdjacentElement('beforeend', name);
+
+// new div.dropdown
+let temp = document.createElement('div');
+temp.classList.add("dropdowntemp");
+div.insertAdjacentElement('beforeend', temp);
+//
+let tempdd = document.createElement('p');
+tempdd.textContent = '気温 = '+ data.main.temp + '°C';
+temp.insertAdjacentElement('beforeend', tempdd);
+//new div.dd
+let max = document.createElement('div');
+max.classList.add("dd");
+temp.insertAdjacentElement('beforeend', max);
+//max
+let tempmax = document.createElement('p');
+tempmax.textContent = '最高 = '+data.main.temp_max + '°C';
+max.insertAdjacentElement('beforeend', tempmax);
+//min
+let tempmin = document.createElement('p');
+tempmin.textContent = '最低 = ' +data.main.temp_min + '°C';
+max.insertAdjacentElement('beforeend', tempmin);
+
+
+let weather = document.createElement('p');
+weather.textContent = '天気 = '+data.weather[0].description ;
+div.insertAdjacentElement('beforeend', weather);
+
+let humidity = document.createElement('p');
+humidity.textContent = '湿度 = '+data.main.humidity +'%';
+div.insertAdjacentElement('beforeend', humidity);
+
+let wind = document.createElement('p');
+wind.textContent = '風速 = ' +data.wind.speed + '(m/s)';
+div.insertAdjacentElement('beforeend', wind);
+
+}
+
+// 通信エラーが発生した時の処理
+function showError(err) {
+console.log(err);
+}	
+
+// 通信の最後にいつも実行する処理
+function finish() {
+console.log('Ajax 通信が終わりました');
+}
+
+
+
+
+
+function sendRequest1(cityId, box) {
+// URL を設定
+let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/' + cityId + '.json';
+
+// 通信開始
+axios.get(url)
+    .then(response => showResult1(response, box))
+    .catch(showError1)
+    .then(finish1);
+}
+
+// 通信が成功した時の処理
+function showResult1(resp, box) {
+// サーバから送られてきたデータを出力
+let data = resp.data;
+
+// data が文字列型なら，オブジェクトに変換する
+if (typeof data === 'string') {
+    data = JSON.parse(data);
+}
+
+let name = document.createElement('p');
+name.classList.add("name");
+name.textContent =data.name;
+box.appendChild(name);
+
+let temp1 = document.createElement('p');
+temp1.textContent = '気温: ' + data.main.temp + '°C';
+box.appendChild(temp1);
+
+
+
+let weather = document.createElement('p');
+weather.textContent = '天気: ' + data.weather[0].description;
+box.appendChild(weather);
+
+let humidity = document.createElement('p');
+humidity.textContent = '湿度: ' + data.main.humidity + '%';
+box.appendChild(humidity);
+
+let wind = document.createElement('p');
+wind.textContent = '風速: ' + data.wind.speed + ' m/s';
+box.appendChild(wind);
+}
+
+// 通信エラーが発生した時の処理
+function showError1(err) {
+console.error(err);
+}
+
+// 通信の最後にいつも実行する処理
+function finish1() {
+console.log('Ajax 通信が終わりました');
+}
+
+let b = document.getElementById('createBoxesBtn');
+b.addEventListener('click', showAll);
+
+function showAll() {
+
+let container = document.getElementById('first');
+let cityIds = [360630, 524901, 993800, 1816670, 1850147, 1880252, 2147714, 2643743, 2968815, 3451189, 5368361, 5128581];
+
+container.innerHTML = ''; // Clear any existing boxes
+for (let i = 0; i < cityIds.length; i++) {
+    const box = document.createElement('div');
+    box.className = 'box';
+    container.appendChild(box);
+    sendRequest1(cityIds[i], box);
+}
+changeBackgroundColor(); 
+}
+
+function getRandomColor() {
+const letters = '0123456789ABCDEF';
+let color = '#';
+for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+}
+return color;
+}
+
+// Change the background color to a random color
+function changeBackgroundColor() {
+document.body.style.backgroundColor = getRandomColor();
+}
+
